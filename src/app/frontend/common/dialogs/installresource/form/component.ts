@@ -114,10 +114,47 @@ export class DialogFormComponent extends ICanDeactivate implements OnInit, OnDes
     return this.form.get('metricsPort');
   }
 	
-  get metricsBYO(): AbstractControl {
-    return this.form.get('metricsBYO');
+	get metricsBYO(): AbstractControl {
+	  return this.form.get('metricsBYO');
+	}
+	
+	get pipyIngressEnabled(): AbstractControl {
+	  return this.form.get('pipyIngressEnabled');
+	}
+	
+	get replicaCount(): AbstractControl {
+	  return this.form.get('replicaCount');
+	}
+	
+  get cpuRequests(): AbstractControl {
+    return this.form.get('cpuRequests');
   }
-
+	
+  get memoryRequests(): AbstractControl {
+    return this.form.get('memoryRequests');
+  }
+	
+  get cpuLimits(): AbstractControl {
+    return this.form.get('cpuLimits');
+  }
+	
+  get memoryLimits(): AbstractControl {
+    return this.form.get('memoryLimits');
+  }
+	
+	
+	//TODO
+  // osmController:
+  //   replicaCount: 1
+  //   resource:
+  //     limits:
+  //       cpu: '1.5'
+  //       memory: 1G
+  //     requests:
+  //       cpu: '0.5'
+  //       memory: 128M
+	
+	
   ngOnInit(): void {
     this.form = this.fb_.group({
       name: ['osm', Validators.compose([Validators.required, FormValidators.namePattern])],
@@ -132,6 +169,12 @@ export class DialogFormComponent extends ICanDeactivate implements OnInit, OnDes
 			metricsEnabled: [true],
 			metricsBYO: [!meshOptions.osm.deployPrometheus],
 			metricsPort: [meshOptions.osm.prometheus.port],
+			pipyIngressEnabled: [meshOptions.fsm.enabled],
+			replicaCount: [meshOptions.osm.osmController.replicaCount],
+			cpuLimits: [meshOptions.osm.osmController.resource.limits.cpu],
+			memoryLimits: [meshOptions.osm.osmController.resource.limits.memory],
+			cpuRequests: [meshOptions.osm.osmController.resource.requests.cpu],
+			memoryRequests: [meshOptions.osm.osmController.resource.requests.memory],
 			timeout: [300],
     });
     this.labelArr = [new DeployLabel(APP_LABEL_KEY, '', false), new DeployLabel()];
@@ -251,6 +294,12 @@ export class DialogFormComponent extends ICanDeactivate implements OnInit, OnDes
 		_options.osm.deployPrometheus = !this.form.get('metricsBYO').value;
 		_options.osm.deployGrafana = !this.form.get('metricsBYO').value;
 		_options.osm.prometheus.port = this.form.get('metricsPort').value;
+		_options.fsm.enabled = this.form.get('pipyIngressEnabled').value;
+		_options.osm.osmController.replicaCount = this.form.get('replicaCount').value;
+		_options.osm.osmController.resource.limits.cpu = this.form.get('cpuLimits').value + '';
+		_options.osm.osmController.resource.limits.memory = this.form.get('memoryLimits').value;
+		_options.osm.osmController.resource.requests.cpu = this.form.get('cpuRequests').value + '';
+		_options.osm.osmController.resource.requests.memory = this.form.get('memoryRequests').value;
 		
     if (this.selectedMode === EditorMode.YAML) {
       this.text = toYaml(_options);
@@ -273,6 +322,13 @@ export class DialogFormComponent extends ICanDeactivate implements OnInit, OnDes
 		this.form.get('tracingEndpoint').setValue(_options.osm.tracing.endpoint, {emitEvent: false});
 		this.form.get('metricsBYO').setValue(!_options.osm.deployPrometheus, {emitEvent: false});
 		this.form.get('metricsPort').setValue(_options.osm.prometheus.port, {emitEvent: false});
+		this.form.get('pipyIngressEnabled').setValue(_options.fsm.enabled, {emitEvent: false});
+		this.form.get('replicaCount').setValue(_options.osm.osmController.replicaCount, {emitEvent: false});
+		this.form.get('cpuLimits').setValue(_options.osm.osmController.resource.limits.cpu*1, {emitEvent: false});
+		this.form.get('memoryLimits').setValue(_options.osm.osmController.resource.limits.memory, {emitEvent: false});
+		this.form.get('cpuRequests').setValue(_options.osm.osmController.resource.requests.cpu*1, {emitEvent: false});
+		this.form.get('memoryRequests').setValue(_options.osm.osmController.resource.requests.memory, {emitEvent: false});
+
 	}
 
   private updateText(): void {
