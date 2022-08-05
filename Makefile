@@ -93,7 +93,7 @@ build: clean ensure-go
 	./aio/scripts/build.sh
 
 .PHONY: build-cross
-build-cross: clean ensure-go
+build-cross: clean ensure-go osm-edge-chart
 	./aio/scripts/build.sh -c
 
 .PHONY: serve-backend
