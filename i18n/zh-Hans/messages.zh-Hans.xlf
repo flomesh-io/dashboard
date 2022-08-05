@@ -71,7 +71,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">273</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/common/dialogs/scaleresource/template.html</context>
@@ -3129,7 +3129,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">306</context>
+          <context context-type="linenumber">299</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1292699022746959928" datatype="html">
@@ -4411,7 +4411,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="3368378053177904137" datatype="html">
-        <source> Learn more <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&quot;\uFFFD#5\uFFFD&quot;"/>open_in_new<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&quot;\uFFFD/#5\uFFFD&quot;"/></source>
+        <source> Learn more <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&quot;\uFFFD#17\uFFFD&quot;"/>open_in_new<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&quot;\uFFFD/#17\uFFFD&quot;"/></source>
         <target> 了解更多 <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i>"/>open_in_new<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i>"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
@@ -4815,7 +4815,7 @@
         <target state="new">Tracing Address</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">199</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5693993471751761333" datatype="html">
@@ -5340,11 +5340,7 @@
         <target>端口</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
-          <context context-type="linenumber">148</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">211</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/create/from/form/portmappings/template.html</context>
@@ -5356,7 +5352,7 @@
         <target state="new">Endpoint</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">222</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1578388299797377382" datatype="html">
@@ -5364,7 +5360,7 @@
         <target state="new">This options variable refer to the</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
-          <context context-type="linenumber">242</context>
+          <context context-type="linenumber">301</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3910914001392684259" datatype="html">
@@ -5967,9 +5963,9 @@
           <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2932039111138751391" datatype="html">
-        <source>Envoy Active Health Checks</source>
-        <target state="new">Envoy主动健康检查</target>
+      <trans-unit id="8816269492280118759" datatype="html">
+        <source>Sidecar Active Health Checks</source>
+        <target state="new">Sidecar Active Health Checks</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
           <context context-type="linenumber">41</context>
@@ -5983,20 +5979,12 @@
           <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="251847595766752843" datatype="html">
-        <source>Multicluster Mode</source>
-        <target state="new">多集群模式</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="7845977383245639706" datatype="html">
         <source>Retry Policy</source>
         <target state="new">重试策略</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5948523838949111183" datatype="html">
@@ -6004,7 +5992,7 @@
         <target state="new">快照缓存模式</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3643179755948647570" datatype="html">
@@ -6012,7 +6000,7 @@
         <target state="new">WASM Stats</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="369679454877964077" datatype="html">
@@ -6020,7 +6008,7 @@
         <target state="new">Traffic</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="846804158093382394" datatype="html">
@@ -6028,7 +6016,7 @@
         <target state="new">出口</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8466739602108422579" datatype="html">
@@ -6036,7 +6024,7 @@
         <target state="new">Permissive Traffic 政策模式</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8704392214783400803" datatype="html">
@@ -6044,7 +6032,7 @@
         <target state="new">Inbound 外部授权</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4816216590591222133" datatype="html">
@@ -6052,7 +6040,7 @@
         <target state="new">可用</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2305332925212985612" datatype="html">
@@ -6060,7 +6048,7 @@
         <target state="new">故障模式允许</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">114</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1145446413898001631" datatype="html">
@@ -6068,7 +6056,7 @@
         <target state="new">Stat前缀</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5956316725115867558" datatype="html">
@@ -6080,7 +6068,47 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6887946724989896925" datatype="html">
+        <source>Replica Count</source>
+        <target state="new">Replica Count</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5549235341317971854" datatype="html">
+        <source>CPU Requests</source>
+        <target state="new">CPU Requests</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4494517044539617791" datatype="html">
+        <source>Memory Requests</source>
+        <target state="new">Memory Requests</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7598914094644081445" datatype="html">
+        <source>CPU Limits</source>
+        <target state="new">CPU Limits</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
+          <context context-type="linenumber">150</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7551351055475761673" datatype="html">
+        <source>Memory Limits</source>
+        <target state="new">Memory Limits</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/frontend/common/dialogs/installresource/form/template.html</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4464819557220640202" datatype="html">
@@ -6088,7 +6116,7 @@
         <target state="new">Inbound端口 (排除)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4356159115555870159" datatype="html">
@@ -6096,7 +6124,7 @@
         <target state="new">网络接口 (排除)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6026266675635277996" datatype="html">
@@ -6104,7 +6132,7 @@
         <target state="new">Outbound IP范围 (排除)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">161</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3466661001278397120" datatype="html">
@@ -6112,7 +6140,7 @@
         <target state="new">Outbound IP范围 (包含)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">172</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1942877751972157523" datatype="html">
@@ -6120,7 +6148,7 @@
         <target state="new">Outbound端口 (包含)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">191</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7164856686778871055" datatype="html">
@@ -6128,7 +6156,7 @@
         <target state="new">证书</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">204</context>
+          <context context-type="linenumber">197</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2077633357850295100" datatype="html">
@@ -6136,7 +6164,7 @@
         <target state="new">证书密钥大小</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">202</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3275615325946911653" datatype="html">
@@ -6144,7 +6172,7 @@
         <target state="new">服务证书有效期</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">215</context>
+          <context context-type="linenumber">208</context>
         </context-group>
       </trans-unit>
       <trans-unit id="503359249737927668" datatype="html">
@@ -6152,7 +6180,7 @@
         <target state="new">Observability</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">225</context>
+          <context context-type="linenumber">218</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7561386923717386826" datatype="html">
@@ -6160,11 +6188,11 @@
         <target state="new">日志级别</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">223</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">263</context>
+          <context context-type="linenumber">256</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7298649257036491249" datatype="html">
@@ -6172,7 +6200,7 @@
         <target state="new">调试</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">233</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3739171898414910183" datatype="html">
@@ -6184,7 +6212,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">247</context>
+          <context context-type="linenumber">240</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9142763216726657948" datatype="html">
@@ -6224,7 +6252,7 @@
         <target state="new">Sidecar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">258</context>
+          <context context-type="linenumber">251</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2534295194500224958" datatype="html">
@@ -6232,7 +6260,7 @@
         <target state="new">本地代理模式</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">273</context>
+          <context context-type="linenumber">266</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9095134843628689709" datatype="html">
@@ -6248,7 +6276,7 @@
         <target state="new">特权初始化容器</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">277</context>
+          <context context-type="linenumber">270</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6764923197117193326" datatype="html">
@@ -6256,7 +6284,7 @@
         <target state="new">配置重新同步间隔</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">284</context>
+          <context context-type="linenumber">277</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1060493315473197889" datatype="html">
@@ -6264,7 +6292,7 @@
         <target state="new">Tls协议最大版本</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">296</context>
+          <context context-type="linenumber">289</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7252331603227904127" datatype="html">
@@ -6272,7 +6300,7 @@
         <target state="new">Tls协议最小版本</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/frontend/resource/osm/mesh/config/template.html</context>
-          <context context-type="linenumber">290</context>
+          <context context-type="linenumber">283</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2417328504220076358" datatype="html">
