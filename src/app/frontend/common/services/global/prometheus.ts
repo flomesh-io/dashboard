@@ -39,18 +39,22 @@ export class PrometheusService {
 	doMetricChange(): void {
 		this.onMetricChange.next();
 	}
+	//(osm_request_duration_ms_bucket{destination_name="bookwarehouse",destination_namespace="bookwarehouse",source_name="bookstore",source_namespace="bookstore"}[1m]
 	getTPS(typeMeta: TypeMeta, objectMeta: ObjectMeta,isInit: boolean) {
-		const query = `topk(2, sum(irate(sidecar_cluster_upstream_rq_xx{}[1m])) by (source_namespace, source_service, sidecar_cluster_name))`;
+		const cond = typeMeta.kind == 'service'?`source_name="${objectMeta.name}",source_namespace="${objectMeta.name}"`:'';
+		const query = `topk(2, sum(irate(sidecar_cluster_upstream_rq_xx{${cond}}[1m])) by (source_namespace, source_service, sidecar_cluster_name))`;
 		const url = PrometheusResource.getUrl(typeMeta, objectMeta, query,isInit);
 		return this.http_.get(url, {responseType: 'text'});
 	}
 	getER(typeMeta: TypeMeta, objectMeta: ObjectMeta,isInit: boolean) {
-		const query = `topk(2, sum(irate(sidecar_cluster_upstream_rq_xx{sidecar_response_code_class!="2"}[1m])) by (source_namespace, source_service, sidecar_cluster_name))`;
+		const cond = typeMeta.kind == 'service'?`source_name="${objectMeta.name}",source_namespace="${objectMeta.name},sidecar_response_code_class!="2""`:'sidecar_response_code_class!="2"';
+		const query = `topk(2, sum(irate(sidecar_cluster_upstream_rq_xx{${cond}}[1m])) by (source_namespace, source_service, sidecar_cluster_name))`;
 		const url = PrometheusResource.getUrl(typeMeta, objectMeta, query,isInit);
 		return this.http_.get(url, {responseType: 'text'});
 	}
 	getLatency(typeMeta: TypeMeta, objectMeta: ObjectMeta,isInit: boolean) {
-		const query = `topk(2, histogram_quantile(0.99,sum(irate(osm_request_duration_ms_bucket{}[1m])) by (le, source_namespace, source_name, destination_namespace, destination_name)))`;
+		const cond = typeMeta.kind == 'service'?`destination_name="${objectMeta.name}"`:'';
+		const query = `topk(2, histogram_quantile(0.99,sum(irate(osm_request_duration_ms_bucket{${cond}}[1m])) by (le, source_namespace, source_name, destination_namespace, destination_name)))`;
 		const url = PrometheusResource.getUrl(typeMeta, objectMeta, query,isInit);
 		return this.http_.get(url, {responseType: 'text'});
 	}

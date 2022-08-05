@@ -104,6 +104,69 @@ limitations under the License.
 					Time to wait for installation and resources in a ready state, zero means no timeout (Default: 5*time.Minute)
 				</kd-user-help>
 			</kd-help-section>
+		 <kd-help-section>
+				<mat-form-field>
+					<input matInput
+								 type="number"
+								 formControlName="replicaCount"
+								 placeholder="Replica Count"
+								 (change)="updateOptionsTab()"
+								 i18n-placeholder />
+				</mat-form-field>
+				<kd-user-help>
+					OSM controller's replica count (ignored when autoscale.enable is true)
+				</kd-user-help>
+			</kd-help-section>
+		 <kd-help-section>
+				<mat-form-field>
+					<input matInput
+								 type="number"
+								 formControlName="cpuRequests"
+								 placeholder="CPU Requests"
+								 (change)="updateOptionsTab()"
+								 i18n-placeholder />
+				</mat-form-field>
+				<kd-user-help>
+					OSM controller's container resource cpu requests.
+				</kd-user-help>
+			</kd-help-section>
+		 <kd-help-section>
+				<mat-form-field>
+					<input matInput
+								 formControlName="memoryRequests"
+								 placeholder="Memory Requests"
+								 (change)="updateOptionsTab()"
+								 i18n-placeholder />
+				</mat-form-field>
+				<kd-user-help>
+					OSM controller's container resource memory requests.
+				</kd-user-help>
+			</kd-help-section>
+		 <kd-help-section>
+				<mat-form-field>
+					<input matInput
+								 type="number"
+								 formControlName="cpuLimits"
+								 placeholder="CPU Limits"
+								 (change)="updateOptionsTab()"
+								 i18n-placeholder />
+				</mat-form-field>
+				<kd-user-help>
+					OSM controller's container resource cpu limits.
+				</kd-user-help>
+			</kd-help-section>
+		 <kd-help-section>
+				<mat-form-field>
+					<input matInput
+								 formControlName="memoryLimits"
+								 placeholder="Memory Limits"
+								 (change)="updateOptionsTab()"
+								 i18n-placeholder />
+				</mat-form-field>
+				<kd-user-help>
+					OSM controller's container resource memory limits.
+				</kd-user-help>
+			</kd-help-section>
 		 <!-- <kd-help-section>
 				<div>
 					<h6 style="font-weight: normal;margin-top: 0;margin-bottom: 10px;">Options</h6>
@@ -123,7 +186,7 @@ limitations under the License.
 			</kd-help-section>
 			<kd-help-section [hidden]="!tracingEnabled.value">
 				<mat-slide-toggle formControlName="tracingBYO" (change)="updateOptionsTab()">
-					Bring Your Own (BYO)
+					Bring Your Own Tracing (BYO)
 				</mat-slide-toggle>
 				<kd-user-help>
 					Steps needed to allow an already running instance of Jaeger to integrate with your OSM control plane. 
@@ -173,22 +236,10 @@ limitations under the License.
 			</kd-help-section>
 			<kd-help-section [hidden]="!metricsEnabled.value">
 				<mat-slide-toggle formControlName="metricsBYO" (change)="updateOptionsTab()">
-					Bring Your Own (BYO) 
+					Bring Your Own Metrics (BYO) 
 				</mat-slide-toggle>
 				<kd-user-help>
 					Steps needed to allow an already running Prometheus instance to poll the endpoints of an OSM mesh.
-				</kd-user-help>
-			</kd-help-section>
-			<kd-help-section [hidden]="!metricsEnabled.value || !metricsBYO.value">
-				<mat-form-field>
-					<input matInput
-						 type="number"
-						 formControlName="metricsPort"
-						 placeholder="Port"
-						 (change)="updateOptionsTab()"
-						 i18n-placeholder />
-				</mat-form-field>
-				<kd-user-help>
 				</kd-user-help>
 			</kd-help-section>
 			<kd-help-section>
@@ -205,6 +256,14 @@ limitations under the License.
 				</mat-slide-toggle>
 				<kd-user-help>
 					Check this option, if you need to enforce only one mesh in the cluster. Once enabled, attempt to install another mesh will trigger error.
+				</kd-user-help>
+			</kd-help-section>
+			<kd-help-section>
+				<mat-slide-toggle formControlName="pipyIngressEnabled">
+					Enable Pipy Ingress
+				</mat-slide-toggle>
+				<kd-user-help>
+					Check this option to deployment of fsm control plane and gateway.
 				</kd-user-help>
 			</kd-help-section>
 			<div class="kd-equivalent-block kd-muted kd-bg-card-dark"

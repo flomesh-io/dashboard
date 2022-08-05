@@ -38,9 +38,9 @@ limitations under the License.
       </div>
     </kd-property>
     <kd-property>
-			<div key i18n>Envoy Active Health Checks</div>
+			<div key i18n>Sidecar Active Health Checks</div>
       <div value>
-        <mat-slide-toggle (change)="save()" labelPosition="after" [(ngModel)]="meshconfig.spec.featureFlags.enableEnvoyActiveHealthChecks" >
+        <mat-slide-toggle (change)="save()" labelPosition="after" [(ngModel)]="meshconfig.spec.featureFlags.enableSidecarActiveHealthChecks" >
 				</mat-slide-toggle>
       </div>
     </kd-property>
@@ -48,13 +48,6 @@ limitations under the License.
 			<div key i18n>Ingress Backend Policy</div>
       <div value>
         <mat-slide-toggle (change)="save()" labelPosition="after" [(ngModel)]="meshconfig.spec.featureFlags.enableIngressBackendPolicy" >
-				</mat-slide-toggle>
-      </div>
-    </kd-property>
-    <kd-property>
-			<div key i18n>Multicluster Mode</div>
-      <div value>
-        <mat-slide-toggle (change)="save()" labelPosition="after" [(ngModel)]="meshconfig.spec.featureFlags.enableMulticlusterMode" >
 				</mat-slide-toggle>
       </div>
     </kd-property>

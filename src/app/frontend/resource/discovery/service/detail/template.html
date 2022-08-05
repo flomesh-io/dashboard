@@ -49,7 +49,9 @@ limitations under the License.
     </kd-property>
   </div>
 </kd-card>
-
+<div *ngIf="service">
+	<kd-mesh-metric [initialized]="isInitialized" (onchange)="onListUpdate($event)" [objectMeta]="service?.objectMeta" [typeMeta]="service?.typeMeta"></kd-mesh-metric>
+</div>
 <kd-endpoint-card-list [endpoints]="service?.endpointList?.endpoints"
                        [initialized]="isInitialized"></kd-endpoint-card-list>
 
