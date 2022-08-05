@@ -62,9 +62,9 @@ func QueryMetric(endpoint string, query string, method string) (*QueryInfo, erro
 // ProxyPrometheus returns detailed information about an query
 func ProxyPrometheus(osmConfigClient osmconfigclientset.Interface, client client.Interface, namespace, name, query, method string) (*QueryInfo, error) {
 	log.Printf("Getting details of %s proxy Prometheus in %s namespace", name, namespace)
-	// TODO
+
 	url := "http://osm-prometheus." + namespace + ".svc.cluster.local:7070"
-	url = "http://192.168.10.35:31001"
+	//url = "http://192.168.10.35:31001"
 	promResult, err := QueryMetric(url, query, method)
 
 	if err != nil {
@@ -88,9 +88,9 @@ func ProxyNamespacePrometheus(osmConfigClient osmconfigclientset.Interface, clie
 	if err != nil || len(cms.Items) == 0 {
 		return nil, err
 	}
-	// TODO
+
 	url := "http://osm-prometheus." + cms.Items[0].Namespace + ".svc.cluster.local:7070"
-	url = "http://192.168.10.35:31001"
+	//url = "http://192.168.10.35:31001"
 
 	promResult, err := QueryMetric(url, query, method)
 	if err != nil {

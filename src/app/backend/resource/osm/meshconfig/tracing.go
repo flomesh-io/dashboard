@@ -37,9 +37,8 @@ func ProxyNamespaceTracing(osmConfigClient osmconfigclientset.Interface, client 
 		return nil, err
 	}
 
-	// TODO
 	url := "http://jaeger." + cms.Items[0].Namespace + ".svc.cluster.local:16686/api/"
-	url = "http://192.168.10.35:31005/api/"
+	//url = "http://192.168.10.35:31005/api/"
 	replaceStr := "/api/v1/tracing/" + namespace + "/"
 
 	promResult, err := QueryJeager(url, strings.Replace(uri, replaceStr, "", 1))
@@ -54,9 +53,9 @@ func ProxyNamespaceTracing(osmConfigClient osmconfigclientset.Interface, client 
 // ProxyTracing returns detailed information about an query
 func ProxyTracing(osmConfigClient osmconfigclientset.Interface, client client.Interface, namespace, name, uri string) (*QueryTracingInfo, error) {
 	log.Printf("Getting details of %s proxy Tracing in %s namespace", name, namespace)
-	// TODO
+
 	url := "http://jaeger." + namespace + ".svc.cluster.local:16686/api/"
-	url = "http://192.168.10.35:31005/api/"
+	//url = "http://192.168.10.35:31005/api/"
 	replaceStr := "/api/v1/meshconfig/" + namespace + "/" + name + "/tracing"
 
 	promResult, err := QueryJeager(url, strings.Replace(uri, replaceStr, "", 1))
