@@ -20,7 +20,7 @@
 image:
   ## Repository for container
   repository: flomesh/osm-dashboard
-  tag: v2.5.1
+  tag: v2.6.0
   pullPolicy: IfNotPresent
   pullSecrets: []
 
