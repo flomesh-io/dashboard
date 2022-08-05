@@ -1029,14 +1029,14 @@ entries:
   osm-dashboard:
   - apiVersion: v2
     appVersion: 2.6.0
-    created: "2022-08-05T16:03:20.85956+08:00"
+    created: "2022-08-05T22:47:43.0495+08:00"
     dependencies:
     - condition: metrics-server.enabled
       name: metrics-server
       repository: https://kubernetes-sigs.github.io/metrics-server/
       version: 3.5.0
     description: General-purpose web UI for Kubernetes clusters
-    digest: 256203093770863a1a6f2b44bf189ebf097c9c831421d97cf227f512b9c76396
+    digest: 2afaa655a04e122ae5f4bffb8159c5c79ec4d6a4f604001fb446417ce2c1c337
     home: https://github.com/flomesh-io/osm-dashboard
     icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg
     keywords:
@@ -1053,4 +1053,4 @@ entries:
     urls:
     - osm-dashboard-5.5.2.tgz
     version: 5.5.2
-generated: "2022-08-05T16:03:20.858272+08:00"
+generated: "2022-08-05T22:47:43.04769+08:00"
