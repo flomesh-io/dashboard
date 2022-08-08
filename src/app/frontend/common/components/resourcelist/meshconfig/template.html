@@ -62,8 +62,9 @@ limitations under the License.
                          i18n>Name</mat-header-cell>
         <mat-cell *matCellDef="let meshconfig"
                   class="col-stretch-xl">
-          <a [routerLink]="getDetailsHref(meshconfig.objectMeta.name, meshconfig.objectMeta.namespace)"
-             queryParamsHandling="preserve">
+<!--           <a [routerLink]="getDetailsHref(meshconfig.objectMeta.name, meshconfig.objectMeta.namespace)"
+             queryParamsHandling="preserve"> -->
+          <a [routerLink]="getConfigHref(meshconfig?.objectMeta.name, meshconfig?.objectMeta.namespace)" [queryParams]="{namespace:meshconfig?.objectMeta.namespace}" queryParamsHandling="preserve">
             {{ meshconfig.meshName }}
           </a>
         </mat-cell>
