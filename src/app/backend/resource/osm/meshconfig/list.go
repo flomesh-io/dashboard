@@ -2,7 +2,6 @@ package meshconfig
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	osmconfigv1alph2 "github.com/openservicemesh/osm/pkg/apis/config/v1alpha2"
@@ -94,18 +93,17 @@ func toMeshConfig(client client.Interface, meshConfig *osmconfigv1alph2.MeshConf
 	}
 
 	meshName := ""
-	configMap, err := client.CoreV1().ConfigMaps(namespace).Get(context.TODO(), meshConfig.ObjectMeta.Name, metaV1.GetOptions{})
+	deployment, err := client.AppsV1().Deployments(namespace).Get(context.TODO(), "osm-controller", metaV1.GetOptions{})
 	if err == nil {
-		meshName = configMap.ObjectMeta.Labels["meshName"]
+		meshName = deployment.ObjectMeta.Labels["meshName"]
 	}
-	fmt.Println(configMap.Data["osm-mesh-config.json"])
+
 	return MeshConfig{
 		ObjectMeta: api.NewObjectMeta(meshConfig.ObjectMeta),
 		TypeMeta:   api.NewTypeMeta(api.ResourceKindMeshConfig),
 		Spec:       meshConfig.Spec,
 		MeshStatus: meshStatus,
 		MeshName:   meshName,
-		Option:     configMap.Data["osm-mesh-config.json"],
 	}
 }
 func GetPodStatus(pods []podApi.Pod) string {
