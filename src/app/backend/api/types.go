@@ -149,7 +149,8 @@ const (
 	ResourceKindEndpoint                 = "endpoint"
 	ResourceKindNetworkPolicy            = "networkpolicy"
 	ResourceKindIngressClass             = "ingressclass"
-	ResourceKindHttpRouteGroup           = "httproutegroup"
+	ResourceKindHTTPRouteGroup           = "httproutegroup"
+	ResourceKindTCPRoute           	     = "tcproute"
 	ResourceKindTrafficSplit             = "trafficsplit"
 	ResourceKindTrafficTarget            = "traffictarget"
 	ResourceKindMeshConfig               = "meshconfig"
@@ -257,7 +258,7 @@ var KindToAPIMapping = map[string]APIMapping{
 	ResourceKindRole:                     {"roles", ClientTypeRbacClient, true},
 	ResourceKindRoleBinding:              {"rolebindings", ClientTypeRbacClient, true},
 	ResourceKindPlugin:                   {"plugins", ClientTypePluginsClient, true},
-	ResourceKindHttpRouteGroup:           {"httproutegroups", ClientTypeSmiSpecsClient, true},
+	ResourceKindHTTPRouteGroup:           {"httproutegroups", ClientTypeSmiSpecsClient, true},
 	ResourceKindTrafficSplit:             {"trafficsplit", ClientTypeSmiSplitClient, true},
 	ResourceKindTrafficTarget:            {"traffictargets", ClientTypeSmiAccessClient, true},
 	ResourceKindMeshConfig:               {"meshconfigs", ClientTypeOsmConfigClient, true},

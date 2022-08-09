@@ -73,6 +73,7 @@ import (
 	resourceService "github.com/kubernetes/dashboard/src/app/backend/resource/service"
 	"github.com/kubernetes/dashboard/src/app/backend/resource/serviceaccount"
 	"github.com/kubernetes/dashboard/src/app/backend/resource/smi/httproutegroup"
+	"github.com/kubernetes/dashboard/src/app/backend/resource/smi/tcproute"
 	"github.com/kubernetes/dashboard/src/app/backend/resource/smi/trafficsplit"
 	"github.com/kubernetes/dashboard/src/app/backend/resource/smi/traffictarget"
 	"github.com/kubernetes/dashboard/src/app/backend/resource/statefulset"
@@ -663,8 +664,28 @@ func CreateHTTPAPIHandler(iManager integration.IntegrationManager, cManager clie
 	// SMI
 	apiV1Ws.Route(
 		apiV1Ws.GET("/httproutgroup").
-			To(apiHandler.handleHttpRouteGroupList).
-			Writes(httproutegroup.HttpRouteGroupList{}))
+			To(apiHandler.handleHTTPRouteGroupList).
+			Writes(httproutegroup.HTTPRouteGroupList{}))
+	apiV1Ws.Route(
+		apiV1Ws.GET("/httproutgroup/{namespace}").
+			To(apiHandler.handleHTTPRouteGroupList).
+			Writes(httproutegroup.HTTPRouteGroupList{}))
+	apiV1Ws.Route(
+		apiV1Ws.GET("/httproutgroup/{namespace}/{name}").
+			To(apiHandler.handleGetHTTPRouteGroupDetail).
+			Writes(httproutegroup.HTTPRouteGroupDetail{}))
+	apiV1Ws.Route(
+		apiV1Ws.GET("/tcproute").
+			To(apiHandler.handleTCPRouteList).
+			Writes(tcproute.TCPRouteList{}))
+	apiV1Ws.Route(
+		apiV1Ws.GET("/tcproute/{namespace}").
+			To(apiHandler.handleTCPRouteList).
+			Writes(tcproute.TCPRouteList{}))
+	apiV1Ws.Route(
+		apiV1Ws.GET("/tcproute/{namespace}/{name}").
+			To(apiHandler.handleGetTCPRouteDetail).
+			Writes(tcproute.TCPRouteDetail{}))
 	apiV1Ws.Route(
 		apiV1Ws.GET("/trafficsplit").
 			To(apiHandler.handleGetTrafficSplitList).
@@ -1070,8 +1091,7 @@ func (apiHandler *APIHandler) handleGetServiceEvent(request *restful.Request, re
 	response.WriteHeaderAndEntity(http.StatusOK, result)
 }
 
-func (apiHandler *APIHandler) handleHttpRouteGroupList(request *restful.Request, response *restful.Response) {
-	println("=== === === >>>>>> handleHttpRouteGroupList")
+func (apiHandler *APIHandler) handleHTTPRouteGroupList(request *restful.Request, response *restful.Response) {
 	smiSpecsClient, err := apiHandler.cManager.SmiSpecsClient(request)
 	if err != nil {
 		errors.HandleInternalError(response, err)
@@ -1079,7 +1099,69 @@ func (apiHandler *APIHandler) handleHttpRouteGroupList(request *restful.Request,
 	}
 	namespace := parseNamespacePathParameter(request)
 	dataSelect := parser.ParseDataSelectPathParameter(request)
-	result, err := httproutegroup.GetHttpRouteGroupList(smiSpecsClient, namespace, dataSelect)
+	result, err := httproutegroup.GetHTTPRouteGroupList(smiSpecsClient, namespace, dataSelect)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+	response.WriteHeaderAndEntity(http.StatusOK, result)
+}
+
+func (apiHandler *APIHandler) handleGetHTTPRouteGroupDetail(request *restful.Request, response *restful.Response) {
+	smiSpecsClient, err := apiHandler.cManager.SmiSpecsClient(request)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+
+	k8sClient, err := apiHandler.cManager.Client(request)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+
+	namespace := request.PathParameter("namespace")
+	name := request.PathParameter("name")
+	result, err := httproutegroup.GetHTTPRouteGroupDetail(smiSpecsClient, k8sClient, namespace, name)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+	response.WriteHeaderAndEntity(http.StatusOK, result)
+}
+
+func (apiHandler *APIHandler) handleTCPRouteList(request *restful.Request, response *restful.Response) {
+	smiSpecsClient, err := apiHandler.cManager.SmiSpecsClient(request)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+	namespace := parseNamespacePathParameter(request)
+	dataSelect := parser.ParseDataSelectPathParameter(request)
+	result, err := tcproute.GetTCPRouteList(smiSpecsClient, namespace, dataSelect)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+	response.WriteHeaderAndEntity(http.StatusOK, result)
+}
+
+func (apiHandler *APIHandler) handleGetTCPRouteDetail(request *restful.Request, response *restful.Response) {
+	smiSpecsClient, err := apiHandler.cManager.SmiSpecsClient(request)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+
+	k8sClient, err := apiHandler.cManager.Client(request)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+
+	namespace := request.PathParameter("namespace")
+	name := request.PathParameter("name")
+	result, err := tcproute.GetTCPRouteDetail(smiSpecsClient, k8sClient, namespace, name)
 	if err != nil {
 		errors.HandleInternalError(response, err)
 		return

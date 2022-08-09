@@ -28,7 +28,6 @@ func GetMeshConfigDetail(osmConfigClient osmconfigclientset.Interface, client cl
 	log.Printf("Getting details of %s meshconfig in %s namespace", name, namespace)
 
 	rawMeshConfig, err := osmConfigClient.ConfigV1alpha2().MeshConfigs(namespace).Get(context.TODO(), name, metaV1.GetOptions{})
-
 	if err != nil {
 		return nil, err
 	}
@@ -38,15 +37,15 @@ func GetMeshConfigDetail(osmConfigClient osmconfigclientset.Interface, client cl
 
 func getMeshConfigDetail(meshConfig *osmconfigv1alph2.MeshConfig, client client.Interface) *MeshConfigDetail {
 	meshName := ""
-	configMap, err := client.CoreV1().ConfigMaps(meshConfig.ObjectMeta.Namespace).Get(context.TODO(), meshConfig.ObjectMeta.Name, metaV1.GetOptions{})
+	deployment, err := client.AppsV1().Deployments(meshConfig.ObjectMeta.Namespace).Get(context.TODO(), "osm-controller", metaV1.GetOptions{})
 	if err == nil {
-		meshName = configMap.ObjectMeta.Labels["meshName"]
+		meshName = deployment.ObjectMeta.Labels["meshName"]
 	}
+
 	return &MeshConfigDetail{
 		ObjectMeta: api.NewObjectMeta(meshConfig.ObjectMeta),
 		TypeMeta:   api.NewTypeMeta(api.ResourceKindMeshConfig),
 		Spec:       meshConfig.Spec,
 		MeshName:   meshName,
-		Option:     configMap.Data["osm-mesh-config.json"],
 	}
 }

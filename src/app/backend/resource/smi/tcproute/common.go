@@ -1,4 +1,4 @@
-package httproutegroup
+package tcproute
 
 import (
 	"github.com/kubernetes/dashboard/src/app/backend/resource/dataselect"
@@ -7,9 +7,9 @@ import (
 
 // The code below allows to perform complex data section on []api.TrafficTarget
 
-type HTTPRouteGroupCell smispecsv1alpha4.HTTPRouteGroup
+type TCPRouteCell smispecsv1alpha4.TCPRoute
 
-func (self HTTPRouteGroupCell) GetProperty(name dataselect.PropertyName) dataselect.ComparableValue {
+func (self TCPRouteCell) GetProperty(name dataselect.PropertyName) dataselect.ComparableValue {
 	switch name {
 	case dataselect.NameProperty:
 		return dataselect.StdComparableString(self.ObjectMeta.Name)
@@ -23,18 +23,18 @@ func (self HTTPRouteGroupCell) GetProperty(name dataselect.PropertyName) datasel
 	}
 }
 
-func toCells(std []smispecsv1alpha4.HTTPRouteGroup) []dataselect.DataCell {
+func toCells(std []smispecsv1alpha4.TCPRoute) []dataselect.DataCell {
 	cells := make([]dataselect.DataCell, len(std))
 	for i := range std {
-		cells[i] = HTTPRouteGroupCell(std[i])
+		cells[i] = TCPRouteCell(std[i])
 	}
 	return cells
 }
 
-func fromCells(cells []dataselect.DataCell) []smispecsv1alpha4.HTTPRouteGroup {
-	std := make([]smispecsv1alpha4.HTTPRouteGroup, len(cells))
+func fromCells(cells []dataselect.DataCell) []smispecsv1alpha4.TCPRoute {
+	std := make([]smispecsv1alpha4.TCPRoute, len(cells))
 	for i := range std {
-		std[i] = smispecsv1alpha4.HTTPRouteGroup(cells[i].(HTTPRouteGroupCell))
+		std[i] = smispecsv1alpha4.TCPRoute(cells[i].(TCPRouteCell))
 	}
 	return std
 }

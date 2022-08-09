@@ -137,8 +137,11 @@ type ResourceChannels struct {
 	// List and error channels to ClusterRoleBindings
 	ClusterRoleBindingList ClusterRoleBindingListChannel
 
-	// List and error channels to HttpRouteGroups.
-	HttpRouteGroupList HttpRouteGroupListChannel
+	// List and error channels to HTTPRouteGroups.
+	HTTPRouteGroupList HTTPRouteGroupListChannel
+
+	// List and error channels to TCPRoute.
+	TCPRouteList TCPRouteListChannel
 
 	// List and error channels to TrafficSplits.
 	TrafficSplitList TrafficSplitListChannel
@@ -183,23 +186,55 @@ func GetServiceListChannel(client client.Interface, nsQuery *NamespaceQuery,
 	return channel
 }
 
-// HttpRouteGroupListChannel is a list and error channels to HttpRouteGroup.
-type HttpRouteGroupListChannel struct {
+// HTTPRouteGroupListChannel is a list and error channels to HTTPRouteGroup.
+type HTTPRouteGroupListChannel struct {
 	List  chan *smispecsv1alpha4.HTTPRouteGroupList
 	Error chan error
 }
 
-// GetHttpRouteGroupListChannel returns a pair of channels to a HttpRouteGroup list and errors that both
+// GetHTTPRouteGroupListChannel returns a pair of channels to a HTTPRouteGroup list and errors that both
 // must be read numReads times.
-func GetHttpRouteGroupListChannel(smiSpecsClient smispecsclientset.Interface, nsQuery *NamespaceQuery,
-	numReads int) HttpRouteGroupListChannel {
-	channel := HttpRouteGroupListChannel{
+func GetHTTPRouteGroupListChannel(smiSpecsClient smispecsclientset.Interface, nsQuery *NamespaceQuery,
+	numReads int) HTTPRouteGroupListChannel {
+	channel := HTTPRouteGroupListChannel{
 		List:  make(chan *smispecsv1alpha4.HTTPRouteGroupList, numReads),
 		Error: make(chan error, numReads),
 	}
 	go func() {
 		list, err := smiSpecsClient.SpecsV1alpha4().HTTPRouteGroups(nsQuery.ToRequestParam()).List(context.TODO(), api.ListEverything)
 		var filteredItems []smispecsv1alpha4.HTTPRouteGroup
+		for _, item := range list.Items {
+			if nsQuery.Matches(item.ObjectMeta.Namespace) {
+				filteredItems = append(filteredItems, item)
+			}
+		}
+		list.Items = filteredItems
+		for i := 0; i < numReads; i++ {
+			channel.List <- list
+			channel.Error <- err
+		}
+	}()
+
+	return channel
+}
+
+// TCPRouteListChannel is a list and error channels to TCPRoute.
+type TCPRouteListChannel struct {
+	List  chan *smispecsv1alpha4.TCPRouteList
+	Error chan error
+}
+
+// TCPRouteListChannel returns a pair of channels to a TCPRoute list and errors that both
+// must be read numReads times.
+func GetTCPRouteListChannel(smiSpecsClient smispecsclientset.Interface, nsQuery *NamespaceQuery,
+	numReads int) TCPRouteListChannel {
+	channel := TCPRouteListChannel{
+		List:  make(chan *smispecsv1alpha4.TCPRouteList, numReads),
+		Error: make(chan error, numReads),
+	}
+	go func() {
+		list, err := smiSpecsClient.SpecsV1alpha4().TCPRoutes(nsQuery.ToRequestParam()).List(context.TODO(), api.ListEverything)
+		var filteredItems []smispecsv1alpha4.TCPRoute
 		for _, item := range list.Items {
 			if nsQuery.Matches(item.ObjectMeta.Namespace) {
 				filteredItems = append(filteredItems, item)

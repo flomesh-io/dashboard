@@ -12,59 +12,59 @@ import (
 	"github.com/kubernetes/dashboard/src/app/backend/resource/dataselect"
 )
 
-// HttpRouteGroup is a representation of a httpgroup.
-type HttpRouteGroup struct {
+// HTTPRouteGroup is a representation of a httpgroup.
+type HTTPRouteGroup struct {
 	ObjectMeta api.ObjectMeta `json:"objectMeta"`
 	TypeMeta   api.TypeMeta   `json:"typeMeta"`
 }
 
-// HttpRouteGroupList contains a list of services in the cluster.
-type HttpRouteGroupList struct {
+// HTTPRouteGroupList contains a list of services in the cluster.
+type HTTPRouteGroupList struct {
 	ListMeta api.ListMeta `json:"listMeta"`
 
-	// Unordered list of httpgroups.
-	HttpRouteGroups []HttpRouteGroup `json:"httpgroups"`
+	// Unordered list of httpRouteGroups.
+	HTTPRouteGroups []HTTPRouteGroup `json:"httpRouteGroups"`
 
 	// List of non-critical errors, that occurred during resource retrieval.
 	Errors []error `json:"errors"`
 }
 
 // GetServiceList returns a list of all services in the cluster.
-func GetHttpRouteGroupList(smiSpecsClient smispecsclientset.Interface, nsQuery *common.NamespaceQuery,
-	dsQuery *dataselect.DataSelectQuery) (*HttpRouteGroupList, error) {
+func GetHTTPRouteGroupList(smiSpecsClient smispecsclientset.Interface, nsQuery *common.NamespaceQuery,
+	dsQuery *dataselect.DataSelectQuery) (*HTTPRouteGroupList, error) {
 	log.Print("Getting list of all http route group in the cluster")
 
 	channels := &common.ResourceChannels{
-		HttpRouteGroupList: common.GetHttpRouteGroupListChannel(smiSpecsClient, nsQuery, 1),
+		HTTPRouteGroupList: common.GetHTTPRouteGroupListChannel(smiSpecsClient, nsQuery, 1),
 	}
 
-	return GetHttpRouteGroupListFromChannels(channels, dsQuery)
+	return GetHTTPRouteGroupListFromChannels(channels, dsQuery)
 }
 
-// GetHttpRouteGroupListFromChannels returns a list of all services in the cluster.
-func GetHttpRouteGroupListFromChannels(channels *common.ResourceChannels,
-	dsQuery *dataselect.DataSelectQuery) (*HttpRouteGroupList, error) {
-	httpRouteGroups := <-channels.HttpRouteGroupList.List
-	err := <-channels.HttpRouteGroupList.Error
+// GetHTTPRouteGroupListFromChannels returns a list of all services in the cluster.
+func GetHTTPRouteGroupListFromChannels(channels *common.ResourceChannels,
+	dsQuery *dataselect.DataSelectQuery) (*HTTPRouteGroupList, error) {
+	httpRouteGroups := <-channels.HTTPRouteGroupList.List
+	err := <-channels.HTTPRouteGroupList.Error
 	nonCriticalErrors, criticalError := errors.HandleError(err)
 	if criticalError != nil {
 		return nil, criticalError
 	}
 
-	return CreateHttpRouteGroupList(httpRouteGroups.Items, nonCriticalErrors, dsQuery), nil
+	return CreateHTTPRouteGroupList(httpRouteGroups.Items, nonCriticalErrors, dsQuery), nil
 }
 
-func toHttpRouteGroup(httpRouteGroup *smispecsv1alpha4.HTTPRouteGroup) HttpRouteGroup {
-	return HttpRouteGroup{
+func toHTTPRouteGroup(httpRouteGroup *smispecsv1alpha4.HTTPRouteGroup) HTTPRouteGroup {
+	return HTTPRouteGroup{
 		ObjectMeta: api.NewObjectMeta(httpRouteGroup.ObjectMeta),
-		TypeMeta:   api.NewTypeMeta(api.ResourceKindHttpRouteGroup),
+		TypeMeta:   api.NewTypeMeta(api.ResourceKindHTTPRouteGroup),
 	}
 }
 
-// CreateHttpRouteGroupList returns paginated httpgroup list based on given httpgroup array and pagination query.
-func CreateHttpRouteGroupList(httpRouteGroups []smispecsv1alpha4.HTTPRouteGroup, nonCriticalErrors []error, dsQuery *dataselect.DataSelectQuery) *HttpRouteGroupList {
-	httpRouteGroupsList := &HttpRouteGroupList{
-		HttpRouteGroups: make([]HttpRouteGroup, 0),
+// CreateHTTPRouteGroupList returns paginated httpgroup list based on given httpgroup array and pagination query.
+func CreateHTTPRouteGroupList(httpRouteGroups []smispecsv1alpha4.HTTPRouteGroup, nonCriticalErrors []error, dsQuery *dataselect.DataSelectQuery) *HTTPRouteGroupList {
+	httpRouteGroupsList := &HTTPRouteGroupList{
+		HTTPRouteGroups: make([]HTTPRouteGroup, 0),
 		ListMeta:        api.ListMeta{TotalItems: len(httpRouteGroups)},
 		Errors:          nonCriticalErrors,
 	}
@@ -74,7 +74,7 @@ func CreateHttpRouteGroupList(httpRouteGroups []smispecsv1alpha4.HTTPRouteGroup,
 	httpRouteGroupsList.ListMeta = api.ListMeta{TotalItems: filteredTotal}
 
 	for _, httpRouteGroup := range httpRouteGroups {
-		httpRouteGroupsList.HttpRouteGroups = append(httpRouteGroupsList.HttpRouteGroups, toHttpRouteGroup(&httpRouteGroup))
+		httpRouteGroupsList.HTTPRouteGroups = append(httpRouteGroupsList.HTTPRouteGroups, toHTTPRouteGroup(&httpRouteGroup))
 	}
 
 	return httpRouteGroupsList
