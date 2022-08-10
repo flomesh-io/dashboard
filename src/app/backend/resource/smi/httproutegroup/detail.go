@@ -18,14 +18,14 @@ import (
 type HTTPRouteGroupDetail struct {
 	ObjectMeta api.ObjectMeta `json:"objectMeta"`
 	TypeMeta   api.TypeMeta   `json:"typeMeta"`
-	// Spec is the MeshConfig specification.
+	// Spec is the HTTPRouteGroup specification.
 	// +optional
 	Spec     smispecsv1alpha4.HTTPRouteGroupSpec 	`json:"spec,omitempty"`
 	MeshName string                          		`json:"meshName"`
 	Option   string                          		`json:"option"`
 }
 
-// GetHTTPRouteGroupDetail returns detailed information about an meshconfig
+// GetHTTPRouteGroupDetail returns detailed information about an httproutegroup
 func GetHTTPRouteGroupDetail(smiSpecsClient smispecsclientset.Interface, client client.Interface, namespace, name string) (*HTTPRouteGroupDetail, error) {
 	log.Printf("Getting details of %s httproutegroup in %s namespace", name, namespace)
 

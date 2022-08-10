@@ -18,14 +18,14 @@ import (
 type TCPRouteDetail struct {
 	ObjectMeta api.ObjectMeta `json:"objectMeta"`
 	TypeMeta   api.TypeMeta   `json:"typeMeta"`
-	// Spec is the MeshConfig specification.
+	// Spec is the TCPRoute specification.
 	// +optional
 	Spec     smispecsv1alpha4.TCPRouteSpec 	`json:"spec,omitempty"`
 	MeshName string                         `json:"meshName"`
 	Option   string                         `json:"option"`
 }
 
-// GetTCPRouteDetail returns detailed information about an meshconfig
+// GetTCPRouteDetail returns detailed information about an tcproute
 func GetTCPRouteDetail(smiSpecsClient smispecsclientset.Interface, client client.Interface, namespace, name string) (*TCPRouteDetail, error) {
 	log.Printf("Getting details of %s tcproute in %s namespace", name, namespace)
 

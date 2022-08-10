@@ -691,9 +691,25 @@ func CreateHTTPAPIHandler(iManager integration.IntegrationManager, cManager clie
 			To(apiHandler.handleGetTrafficSplitList).
 			Writes(trafficsplit.TrafficSplitList{}))
 	apiV1Ws.Route(
+		apiV1Ws.GET("/trafficsplit/{namespace}").
+			To(apiHandler.handleGetTrafficSplitList).
+			Writes(trafficsplit.TrafficSplitList{}))
+	apiV1Ws.Route(
+		apiV1Ws.GET("/trafficsplit/{namespace}/{name}").
+			To(apiHandler.handleGetTrafficSplitDetail).
+			Writes(trafficsplit.TrafficSplitDetail{}))
+	apiV1Ws.Route(
 		apiV1Ws.GET("/traffictarget").
 			To(apiHandler.handleGetTrafficTargetList).
 			Writes(traffictarget.TrafficTargetList{}))
+	apiV1Ws.Route(
+		apiV1Ws.GET("/traffictarget/{namespace}").
+			To(apiHandler.handleGetTrafficTargetList).
+			Writes(traffictarget.TrafficTargetList{}))
+	apiV1Ws.Route(
+		apiV1Ws.GET("/traffictarget/{namespace}/{name}").
+			To(apiHandler.handleGetTrafficTargetDetail).
+			Writes(traffictarget.TrafficTargetDetail{}))
 
 	// OSM
 	apiV1Ws.Route(
@@ -1185,6 +1201,29 @@ func (apiHandler *APIHandler) handleGetTrafficSplitList(request *restful.Request
 	response.WriteHeaderAndEntity(http.StatusOK, result)
 }
 
+func (apiHandler *APIHandler) handleGetTrafficSplitDetail(request *restful.Request, response *restful.Response) {
+	smiSplitClient, err := apiHandler.cManager.SmiSplitClient(request)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+
+	k8sClient, err := apiHandler.cManager.Client(request)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+
+	namespace := request.PathParameter("namespace")
+	name := request.PathParameter("name")
+	result, err := trafficsplit.GetTrafficSplitDetail(smiSplitClient, k8sClient, namespace, name)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+	response.WriteHeaderAndEntity(http.StatusOK, result)
+}
+
 func (apiHandler *APIHandler) handleGetTrafficTargetList(request *restful.Request, response *restful.Response) {
 	smiAccessClient, err := apiHandler.cManager.SmiAccessClient(request)
 	if err != nil {
@@ -1195,6 +1234,29 @@ func (apiHandler *APIHandler) handleGetTrafficTargetList(request *restful.Reques
 	namespace := parseNamespacePathParameter(request)
 	dataSelect := parser.ParseDataSelectPathParameter(request)
 	result, err := traffictarget.GetTrafficTargetList(smiAccessClient, namespace, dataSelect)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+	response.WriteHeaderAndEntity(http.StatusOK, result)
+}
+
+func (apiHandler *APIHandler) handleGetTrafficTargetDetail(request *restful.Request, response *restful.Response) {
+	smiAccessClient, err := apiHandler.cManager.SmiAccessClient(request)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+
+	k8sClient, err := apiHandler.cManager.Client(request)
+	if err != nil {
+		errors.HandleInternalError(response, err)
+		return
+	}
+
+	namespace := request.PathParameter("namespace")
+	name := request.PathParameter("name")
+	result, err := traffictarget.GetTrafficTargetDetail(smiAccessClient, k8sClient, namespace, name)
 	if err != nil {
 		errors.HandleInternalError(response, err)
 		return
